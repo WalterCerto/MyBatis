@@ -1,0 +1,44 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.PersonaMapper">
+
+	<resultMap type="com.example.mybatis.entity.Persona" id="result">
+		<result property="id" column="id" />
+		<result property="nombre" column="nombre" />
+		<result property="apellido" column="apellido" />
+	</resultMap>
+
+	<resultMap id="resultArticulos" type="com.example.mybatis.entity.Persona">
+		<result property="id" column="id" />
+		<result property="nombre" column="nombre"/>
+		<result property="apellido" column="apellido"/>
+		
+	</resultMap>
+
+	<insert id="insert" parameterType="com.example.mybatis.entity.Persona" useGeneratedKeys="true">
+		insert into persona(nombre,apellido) values
+		(#{persona.nombre},#{persona.apellido})
+	</insert>
+
+	<update id="update">
+		update persona
+		set nombre = #{persona.nombre},
+		apellido = #{persona.apellido}
+		where id = #{persona.id}
+	</update>
+
+	<select id="get" resultMap="result">
+		select P.*
+		from persona P
+		where P.id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from persona where id = #{id}
+	</delete>
+
+	<select id="list" resultMap="result">
+		select * from persona
+	</select>
+
+
+</mapper>

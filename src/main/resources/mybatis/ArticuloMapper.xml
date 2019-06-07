@@ -1,0 +1,37 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.ArticuloMapper">
+
+    <resultMap type="com.example.mybatis.entity.Articulo" id="result">
+        <result property="codigo" column="codigo" />
+        <result property="nombre" column="nombre" />
+        <result property="categoria" column="categoria" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.mybatis.entity.Articulo" useGeneratedKeys="true">
+        insert into articulo(nombre,categoria) values
+        (#{articulo.nombre},#{articulo.categoria})
+    </insert>
+
+    <update id="update">
+        update articulo
+        set nombre = #{articulo.nombre},
+        categoria = #{articulo.categoria}
+        where codigo = #{articulo.codigo}
+    </update>
+
+    <select id="get" resultMap="result">
+        select A.*
+        from articulo A
+        where A.codigo = #{codigo}
+    </select>
+
+    <delete id="delete">
+        delete from articulo where codigo = #{codigo}
+    </delete>
+
+    <select id="list" resultMap="result">
+        select * from articulo
+    </select>
+
+
+</mapper>
